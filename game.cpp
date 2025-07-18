@@ -7,157 +7,98 @@ void boil()
     cout << "1. stone" << endl;
     cout << "2. paper" << endl;
     cout << "3. scissor" << endl;
-    cout << "Enter end for quit the game";
+    cout << "4. end for quit the game";
 };
-int change(string ch)
+
+string change(int random)
 {
-    int num2 = 0;
 
-    if (ch == "stone")
+    if (random == 1)
     {
-        num2 = 1;
+        return "stone";
     }
-    else if (ch == "paper")
+    else if (random == 2)
     {
-        num2 = 2;
+        return "paper";
     }
-    else if (ch == "scissor")
-    {
-        num2 = 3;
-    }
-    else if (ch == "end")
-    {
-
-        num2 = 5;
-    }
-
     else
-    {
-        // cout<<"invalid";
-        num2 = 4;
-    }
-    // cout<<num2;
-    return num2;
-};
-string comp(int com)
-{
-    string a;
-
-    if (com == 1)
-    {
-        a = "computer's choice is : stone";
-    }
-    else if (com == 2)
-    {
-        a = "computer's choice is : paper";
-    }
-    else if (com == 3)
-    {
-        a = "computer's choice is : scissor";
-    }
-
-    return a;
-};
-void win(int count, int my)
-{
-    cout << "your score is : " << my << " and " << "computer's score is : " << count << endl;
+        return "scissor";
 };
 
 int main()
 {
-    int random, num, count = 0, my = 0;
-    string ch;
-    srand(time(0));
+    int myscore = 0, compscore = 0;
     boil();
+    cout << endl
+         << endl;
     for (int i = 0;; i++)
     {
 
-        random = rand() % 3 + 1;
-
-        cout << endl
-             << "Enter your choice : ";
-        getline(cin, ch);
-        num = change(ch);
-        if (num == 5)
+        int random = rand() % 3 + 1;
+        string mychoice;
+        cout << "Enter your choice : ";
+        cin >> mychoice;
+        if (mychoice == ("stone"))
         {
-            cout << "Game Ended" << endl;
+            if (change(random) == ("paper"))
+            {
+                cout << ("You loose computer is win !") << endl;
+                compscore++;
+            }
+            else if (change(random) == ("scissor"))
+            {
+                cout << ("You  win !") << endl;
+                myscore++;
+            }
+            else
+            {
+                cout << ("Match Tie") << endl;
+            }
+        }
+        if (mychoice == ("paper"))
+        {
+            if (change(random) == ("scissor"))
+            {
+                cout << ("You loose computer is win !") << endl;
+                compscore++;
+            }
+            else if (change(random) == ("stone"))
+            {
+                cout << ("You  win !") << endl;
+                myscore++;
+            }
+            else
+            {
+                cout << ("Match Tie") << endl;
+            }
+        }
+        if (mychoice == ("scissor"))
+        {
+            if (change(random) == ("stone"))
+            {
+                cout << ("You loose computer is win !") << endl;
+                compscore++;
+            }
+            else if (change(random) == ("paper"))
+            {
+                cout << ("You  win !") << endl;
+                myscore++;
+            }
+            else
+            {
+                cout << ("Match Tie") << endl;
+            }
+        }
+        else if (mychoice == ("end"))
+        {
+            cout << ("Game is over !") << endl;
             break;
         }
-
-        // cin>>num;
-        if (num == 1)
+        else if (mychoice != ("stone") && mychoice != ("paper") && mychoice != ("scissor"))
         {
-            if (random == 1)
-            {
-                cout << "MATCH TIE" << endl;
-                cout << comp(random);
-            }
-            else if (random == 2)
-            {
-                cout << "COMPUTER IS WIN " << endl;
-                cout << comp(random);
-                count++;
-            }
-            else if (random == 3)
-            {
-                cout << "YOU WIN  " << endl;
-                cout << comp(random) << endl;
-                my++;
-                win(count, my);
-
-                // break;
-            }
+            cout << ("Invalid Input\n");
         }
-        else if (num == 2)
-        {
-            if (random == 1)
-            {
-                cout << "YOU WIN  " << endl;
-                cout << comp(random) << endl;
-                my++;
-                win(count, my);
-
-                // break;
-            }
-            else if (random == 2)
-            {
-                cout << "MATCH TIE" << endl;
-                cout << comp(random);
-            }
-            else if (random == 3)
-            {
-                cout << "COMPUTER IS WIN" << endl;
-                cout << comp(random);
-                count++;
-            }
-        }
-        else if (num == 3)
-        {
-            if (random == 1)
-            {
-                cout << "COMPUTER IS WIN" << endl;
-                cout << comp(random) << endl;
-                count++;
-            }
-            else if (random == 2)
-            {
-                cout << "YOU WIN  " << endl;
-                cout << comp(random) << endl;
-                my++;
-                win(count, my);
-
-                // break;
-            }
-            else if (random == 3)
-            {
-                cout << "MATCH TIE" << endl;
-                cout << comp(random);
-            }
-        }
-        else
-        {
-            cout << "Invalid";
-        }
+        cout << "My score is : " << myscore << " Computer's score is : " << compscore << endl;
     }
     return 0;
 }
